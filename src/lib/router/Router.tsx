@@ -10,10 +10,29 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate to="/search" replace />} />
-          <Route path="search" element={<SearchPage />} />
-          <Route path="history" element={<HistoryPage />} />
+          {mainRoutes.map(route => <Route path={route.path} element={route.element} key={route.path} />)}
         </Route>
       </Routes>
     </BrowserRouter>
   );
 };
+
+
+interface RouteDefiniation {
+    path: string
+    element: React.ReactNode
+    label:string
+}
+
+export const mainRoutes: RouteDefiniation[] = [
+    {
+        path: '/search',
+        element: <SearchPage />,
+        label: 'Search'
+    },
+    {
+        path: '/history',
+        element: <HistoryPage />,
+        label: 'History'
+    }
+]
