@@ -92,8 +92,7 @@ const MenuNavLink = styled(Navlink)`
 const Root = styled(Box)`
   padding: ${(props) => props.theme.spacing(4)};
   border-bottom: solid 1px ${(props) => props.theme.palette.divider};
-  //background-color: ${(props) =>
-    darken(props.theme.palette.background.default, 0.1)};
+  background-color: ${props => props.theme.palette.background.paper};
   //box-shadow: ${(props) => props.theme.shadows[1]};
   width: 100%;
 `;

@@ -88,13 +88,8 @@ const TextButton = styled(MuiButton)`
 `;
 
 const OutlinedButton = styled(MuiButton)`
-  border: 1px solid ${(props) => props.theme.palette.primary.main};
-  &:hover,
-  &:active,
-  &.Mui-disabled {
-    border: 1px solid ${(props) => props.theme.palette.primary.main};
-    background-color: rgb(255 255 255 / 15%);
-  }
+  padding: calc(${props => props.theme.spacing(VERTICAL_SPACING)} - 1px) calc(${props =>
+        props.theme.spacing(HORIZONTAL_SPACING)} - 1px);
 `;
 
 const ContainedButton = styled(MuiButton)`

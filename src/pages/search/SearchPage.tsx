@@ -2,10 +2,13 @@ import { Page } from 'components/page/Page';
 import { PageHeader } from 'components/page/PageHeader';
 import { Text } from 'components/Text';
 import React from 'react';
+import { SearchBar } from './SearchBar';
 
 const SearchPage = () => {
   return (
-    <Text variant="h1">SearchPage</Text>
+    <>
+    <SearchBar />
+    </>
   );
 };
 
