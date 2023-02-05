@@ -108,6 +108,12 @@ const ContainedButton = styled(MuiButton)`
   &:focus-visible {
     filter: brightness(1.1);
   }
+
+  &:disabled {
+    filter: grayscale(1);
+    color: white;
+    opacity:0.7;
+  }
 `;
 
 const variantMap: Record<

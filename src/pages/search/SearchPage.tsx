@@ -1,15 +1,15 @@
-import { Page } from 'components/page/Page';
-import { PageHeader } from 'components/page/PageHeader';
-import { Text } from 'components/Text';
-import React from 'react';
-import { SearchBar } from './SearchBar';
+import { Stack } from 'components/Stack';
+import { FilterContextProvider } from 'features/github-search/context/FiltersContext';
+import { SearchResults } from 'features/github-search/SearchResults';
+import { SearchBar } from '../../features/github-search/SearchBar';
 
 const SearchPage = () => {
   return (
-    <>
-    <SearchBar />
-    </>
+    <FilterContextProvider>
+      <SearchBar />
+      <SearchResults />
+    </FilterContextProvider>
   );
 };
 
-export default SearchPage
+export default SearchPage;

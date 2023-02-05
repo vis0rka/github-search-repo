@@ -93,8 +93,10 @@ const Root = styled(Box)`
   padding: ${(props) => props.theme.spacing(4)};
   border-bottom: solid 1px ${(props) => props.theme.palette.divider};
   background-color: ${props => props.theme.palette.background.paper};
-  //box-shadow: ${(props) => props.theme.shadows[1]};
   width: 100%;
+  position:sticky;
+  top:0;
+  z-index: 2;
 `;
 
 const StyledNav = styled.nav`

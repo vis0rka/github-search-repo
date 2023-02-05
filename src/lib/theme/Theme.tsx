@@ -1,10 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import {
-  NavLink as RouterLink,
-  NavLinkProps as RouterLinkProps,
-} from 'react-router-dom';
-import { LinkProps } from '@mui/material/Link';
-import React from 'react';
 
 const spacing = {
   0: 0,
