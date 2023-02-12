@@ -1,4 +1,3 @@
-import { createTheme } from '@mui/material/styles';
 import {
   NavLink as RouterLink,
   NavLinkProps as RouterLinkProps,

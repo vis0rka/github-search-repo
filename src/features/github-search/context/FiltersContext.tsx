@@ -13,13 +13,19 @@ import {
   withDefault,
 } from 'use-query-params';
 
-interface SearchFilterState {
+export interface SearchFilterState {
   search: GetRepoParams['search'];
   in: GetRepoParams['in'];
-  order: GetRepoParams['order']
-  sort: GetRepoParams['sort']
-  enabled: boolean
-  page: number
+  order: GetRepoParams['order'];
+  sort: GetRepoParams['sort'];
+  page: number;
+  forks: GetRepoParams['forks'];
+  stars: GetRepoParams['stars'];
+  user: GetRepoParams['user'];
+  org: GetRepoParams['org'];
+  language: GetRepoParams['language'];
+  topic: GetRepoParams['topic'];
+  created: GetRepoParams['created'];
   // fixing some weird use-query-params typing issue
   [key: string]: any;
 }
@@ -35,11 +41,35 @@ const filtersContext = createContext<FiltersContextState>(
 
 export const initalFilters = {
   search: withDefault<any, GetRepoParams['search']>(StringParam, ''),
-  in: withDefault<any, GetRepoParams['in']>(DelimitedArrayParam, ['name']) as QueryParamConfig<string[]>,
+  in: withDefault<any, GetRepoParams['in']>(DelimitedArrayParam, [
+    'name',
+  ]) as QueryParamConfig<string[]>,
   order: withDefault<any, GetRepoParams['order']>(StringParam, 'desc'),
   sort: withDefault<any, GetRepoParams['sort']>(StringParam, 'default'),
-  enabled: withDefault<any, boolean>(BooleanParam, false),
   page: withDefault<any, number>(NumberParam, 1),
+  forks: withDefault<any, GetRepoParams['forks']>(StringParam, undefined),
+  user: withDefault<any, GetRepoParams['user']>(StringParam, undefined),
+  org: withDefault<any, GetRepoParams['org']>(StringParam, undefined),
+  stars: withDefault<any, GetRepoParams['stars']>(
+    DelimitedArrayParam,
+    undefined
+  ) as QueryParamConfig<string[]>,
+  created: withDefault<any, GetRepoParams['created']>(
+    DelimitedArrayParam,
+    undefined
+  ) as QueryParamConfig<string[]>,
+  size: withDefault<any, GetRepoParams['size']>(
+    DelimitedArrayParam,
+    undefined
+  ) as QueryParamConfig<string[]>,
+  language: withDefault<any, GetRepoParams['language']>(
+    DelimitedArrayParam,
+    undefined
+  ) as QueryParamConfig<string[]>,
+  topic: withDefault<any, GetRepoParams['topic']>(
+    DelimitedArrayParam,
+    undefined
+  ) as QueryParamConfig<string[]>,
 };
 
 export const FilterContextProvider = ({

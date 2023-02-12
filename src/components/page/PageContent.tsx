@@ -8,12 +8,14 @@ interface PageContentProps {
 
 export const PageContent:React.FC<PageContentProps> = ({children}) => {
   return (
-    <Root>
+    <Root component='main'>
         {children}
     </Root>
   )
 }
 
 const Root = styled(Box)`
-    padding: ${(props) => props.theme.spacing(4)};
+    display:flex;
+    flex-direction: column;
+    height: 100%;
 `

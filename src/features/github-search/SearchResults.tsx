@@ -4,17 +4,27 @@ import { Box } from 'components/Box';
 import { Skeleton } from 'components/Skeleton';
 import { Stack } from 'components/Stack';
 import { Text } from 'components/Text';
-import { useGetRepos } from 'lib/api/GithubQueries';
+import { GetRepos } from 'lib/api/GithubApi';
+import { SearchPageState } from 'pages/search/SearchPage';
 import React from 'react';
 import { SearchResultItem } from './card';
-import { useFiltersContext } from './context/FiltersContext';
-import { SearchResultFooter } from './SearchResultFooter';
+import { SearchResultsPagination } from './SearchResultsPagination';
 import { SearchResultsHeader } from './SearchResultsHeader';
 
-export const SearchResults = () => {
-  const { data, isError, isLoading, fetchStatus } = useGetRepos();
+interface SearchResultsProps {
+  data: GetRepos | null;
+  state: SearchPageState;
+  pagination: React.ReactNode
+  header: React.ReactNode
+}
 
-  if (isError) {
+export const SearchResults: React.FC<SearchResultsProps> = ({
+  data,
+  state,
+  pagination,
+  header
+}) => {
+  if (state === 'error') {
     return (
       <Text variant="h4" textAlign="center" color="error">
         Sorry something went wrong
@@ -22,7 +32,7 @@ export const SearchResults = () => {
     );
   }
 
-  if (fetchStatus === 'fetching') {
+  if (state === 'loading') {
     return (
       <Stack spacing={4} my={4}>
         {Array(10)
@@ -53,7 +63,7 @@ export const SearchResults = () => {
     return (
       <Box my={4}>
         <Text textAlign="center" variant="h5">
-          No MatchPlease search something else...
+          No Match! Please search something else...
         </Text>
       </Box>
     );
@@ -61,13 +71,13 @@ export const SearchResults = () => {
 
   return (
     <Root>
-      <SearchResultsHeader />
+      {header}
       <Stack spacing={4}>
         {data.items?.map((item) => (
           <SearchResultItem key={item.id} repo={item} />
         ))}
       </Stack>
-      <SearchResultFooter />
+      {pagination}
     </Root>
   );
 };
