@@ -7,6 +7,7 @@ import { TextField } from 'components/form/TextField';
 import { DownArrowIcon, SearchIcon, UpArrowIcon } from 'components/Icons';
 import { Stack } from 'components/Stack';
 import { Text } from 'components/Text';
+import { SearchPageState } from 'pages/search/SearchPage';
 import React from 'react';
 import { IReactComponentcWithChild, nonNullable } from 'utils/typeUtils';
 import {
@@ -24,9 +25,10 @@ type MinLengthTextFieldValidationKey =
 
 interface SearchBarProps {
   handleSearch: (filters: SearchFilterState) => void;
+  state: SearchPageState
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ handleSearch, state }) => {
   const { filters, setFilters } = useFiltersContext();
   const [minLengthError, setMinLengthError] = React.useState<
     MinLengthTextFieldValidationKey[]
@@ -173,6 +175,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
                 handleSearch={() => submitSearch()}
                 handleReset={handleReset}
                 isDisabled={false}
+                state={state}
               />
             </Stack>
           )}
@@ -194,7 +197,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
               handleSearch={() => submitSearch()}
               isDisabled={isSearchDisabledInAdvance}
               handleReset={() => handleReset()}
-            />
+              state={state}
+              />
           )}
         </AdvancedSearchBar>
       </Collapse>
@@ -206,12 +210,14 @@ interface SearchButtonFieldProps {
   handleSearch: VoidFunction;
   handleReset: VoidFunction;
   isDisabled: boolean;
+  state: SearchPageState
 }
 
 const SearchButtonField: React.FC<SearchButtonFieldProps> = ({
   handleSearch,
   handleReset,
   isDisabled = false,
+  state,
 }) => {
   return (
     <>
@@ -219,6 +225,7 @@ const SearchButtonField: React.FC<SearchButtonFieldProps> = ({
         startIcon={<SearchIcon />}
         onClick={() => handleSearch()}
         disabled={isDisabled}
+        isLoading={state === 'loading'}
       >
         Search
       </Button>

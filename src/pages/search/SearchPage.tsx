@@ -15,6 +15,7 @@ const SearchPage = () => {
 
   const getRepo = React.useCallback(
     async (filters: GetRepoParams) => {
+      if(state === 'loading') return;
       setState('loading');
       try {
         const res = await api.github.getRepo(filters);
@@ -31,7 +32,7 @@ const SearchPage = () => {
 
   return (
     <Box p={4}>
-      <SearchBar handleSearch={(filters) => getRepo(filters)} />
+      <SearchBar handleSearch={(filters) => getRepo(filters)} state={state}/>
       <SearchResults
         data={data}
         state={state}
