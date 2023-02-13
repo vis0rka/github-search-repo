@@ -1,5 +1,5 @@
 import {
-  Operators,
+  StarsAndSizeOperators,
   radiosNormalizer,
 } from 'features/github-search/SearchSizeAndSizeFilter';
 import { ApiBase } from './ApiBase';
@@ -54,7 +54,7 @@ export class GithubApi extends ApiBase {
     const starParams = (() => {
       if (!params?.stars) return '';
 
-      const operator = params?.stars[0] as Operators;
+      const operator = params?.stars[0] as StarsAndSizeOperators;
 
       if (operator === 'between') {
         return radiosNormalizer[operator].query(
@@ -85,7 +85,7 @@ export class GithubApi extends ApiBase {
     const sizeParams = (() => {
       if (!params?.size) return '';
 
-      const operator = params?.size[0] as Operators;
+      const operator = params?.size[0] as StarsAndSizeOperators;
 
       if (operator === 'between') {
         return radiosNormalizer[operator].query(

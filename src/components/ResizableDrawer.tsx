@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Drawer, Paper } from '@mui/material';
 import React from 'react';
-import { IReactComponentcWithChild } from 'utils/typeUtils';
+import { IReactComponentcWithChild, transientOptions } from 'utils/typeUtils';
 import { Box } from './Box';
 import { Stack } from './Stack';
 
@@ -52,7 +52,7 @@ const Root = styled(Box)`
   height: 100%;
 `
 
-const StyledContainer = styled(Box)<{ $width: number }>`
+const StyledContainer = styled(Box, transientOptions)<{ $width: number }>`
   width: ${(props) => `calc(100% - ${props.$width}px)`};
 `;
 

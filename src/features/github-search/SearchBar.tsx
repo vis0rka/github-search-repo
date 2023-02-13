@@ -16,7 +16,7 @@ import {
   useFiltersContext,
 } from './context/FiltersContext';
 import { SearchDatePicker } from './SearchDatePicker';
-import { SearchSizeAndSizeFilter } from './SearchSizeAndSizeFilter';
+import { SearchStarsAndSizeFilter } from './SearchSizeAndSizeFilter';
 
 const minLengthTextFieldValidation = ['search', 'user', 'org'] as const;
 
@@ -291,7 +291,7 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBar> = ({
         />
       </Stack>
       <Stack direction="row" spacing={4} justifyContent="space-between">
-        <SearchSizeAndSizeFilter
+        <SearchStarsAndSizeFilter
           initalValue={filters.stars}
           handleChange={(value) => setFilters({ stars: value }, 'replaceIn')}
           head={<Text minWidth="5rem">★ stars</Text>}
@@ -303,7 +303,7 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBar> = ({
         />
       </Stack>
       <Stack direction="row">
-        <SearchSizeAndSizeFilter
+        <SearchStarsAndSizeFilter
           handleChange={(value) => setFilters({ size: value }, 'replaceIn')}
           initalValue={filters.size}
           head={<Text minWidth="5rem">⇅ size (kb)</Text>}

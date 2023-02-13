@@ -6,15 +6,15 @@ import { Stack } from 'components/Stack';
 import { useDebounce } from 'hooks/useDebounce';
 import React from 'react';
 
-interface SearchSizeAndSizeFilterProps {
+interface SearchStarsAndSizeFilterProps {
   head: React.ReactNode;
   initalValue?: string[];
   handleChange: (value: string[]) => void;
 }
 
-const operators = ['equal', 'greaterThan', 'lessThan', 'between'] as const;
+const startAndSizeOperators = ['equal', 'greaterThan', 'lessThan', 'between'] as const;
 
-export type Operators = typeof operators[number];
+export type StarsAndSizeOperators = typeof startAndSizeOperators[number];
 
 export const radiosNormalizer = {
   equal: {
@@ -37,8 +37,8 @@ export const radiosNormalizer = {
   },
 };
 
-export const SearchSizeAndSizeFilter: React.FC<
-  SearchSizeAndSizeFilterProps
+export const SearchStarsAndSizeFilter: React.FC<
+  SearchStarsAndSizeFilterProps
 > = ({ head, initalValue, handleChange }) => {
   const [min, setMin] = React.useState<number | null>(
     initalValue ? parseInt(initalValue[1]) : null
@@ -47,8 +47,8 @@ export const SearchSizeAndSizeFilter: React.FC<
     initalValue && initalValue[2] ? parseInt(initalValue[2]) : null
   );
   const [between, setBetween] = React.useState<number[]>([min ?? 0, max ?? 0]);
-  const [options, setOptions] = React.useState<Operators | undefined>(
-    initalValue ? (initalValue[0] as Operators) : undefined
+  const [options, setOptions] = React.useState<StarsAndSizeOperators | undefined>(
+    initalValue ? (initalValue[0] as StarsAndSizeOperators) : undefined
   );
   const isBetween = options === 'between';
   React.useEffect(() => {
@@ -84,9 +84,9 @@ export const SearchSizeAndSizeFilter: React.FC<
         {head}
         <RadioContainer
           value={options ?? ''}
-          onChange={(evt) => setOptions(evt.target.value as Operators)}
+          onChange={(evt) => setOptions(evt.target.value as StarsAndSizeOperators)}
         >
-          {operators.map((operator) => (
+          {startAndSizeOperators.map((operator) => (
             <Radio
               key={operator}
               label={radiosNormalizer[operator].label}

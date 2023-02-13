@@ -23,19 +23,23 @@ const HistoryPage = () => {
 
   const menu = React.useMemo(() => {
     return (
-      <Stack spacing={2} p={2} alignItems='center'>
-        {cacheKeys.map((key) => {
-          return (
-            <Button key={key} variant="outlined">
-              <StyledText
-                fontWeight={600}
-                onClick={() => setSearchedData(cache.get(key) ?? null)}
-              >
-                {key}
-              </StyledText>
-            </Button>
-          );
-        })}
+      <Stack spacing={2} p={2} alignItems="center">
+        {!cacheKeys.length ? (
+          <Text>Please search something</Text>
+        ) : (
+          cacheKeys.map((key) => {
+            return (
+              <Button key={key} variant="outlined">
+                <StyledText
+                  fontWeight={600}
+                  onClick={() => setSearchedData(cache.get(key) ?? null)}
+                >
+                  {key}
+                </StyledText>
+              </Button>
+            );
+          })
+        )}
       </Stack>
     );
   }, []);
@@ -43,10 +47,14 @@ const HistoryPage = () => {
   return (
     <>
       <ResizableDrawer menu={menu}>
-        {!searchedData ? (
-          <Text>Please choose something</Text>
+        {!cacheKeys.length ? null : !searchedData ? (
+          <Box display="flex" justifyContent="center" alignItems="center" m={2}>
+            <Text fontWeight={600} variant="h6">
+              Please choose something
+            </Text>
+          </Box>
         ) : (
-          <Stack spacing={4} p={4} width='100%'>
+          <Stack spacing={4} p={4} width="100%">
             {searchedData.items?.map((item) => (
               <SearchResultItem key={item.id} repo={item} />
             ))}
