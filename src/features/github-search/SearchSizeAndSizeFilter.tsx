@@ -44,7 +44,7 @@ export const SearchStarsAndSizeFilter: React.FC<
     initalValue ? parseInt(initalValue[1]) : null
   );
   const [max, setMax] = React.useState<number | null>(
-    initalValue && initalValue[2] ? parseInt(initalValue[2]) : null
+    initalValue?.[2] ? parseInt(initalValue[2]) : null
   );
   const [between, setBetween] = React.useState<number[]>([min ?? 0, max ?? 0]);
   const [options, setOptions] = React.useState<StarsAndSizeOperators | undefined>(

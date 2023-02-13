@@ -104,7 +104,7 @@ export class GithubApi extends ApiBase {
       ? ` language:${params.language.join(',')}`
       : '';
     const topicParams = params?.topic ? ` topic:${params.topic.join(',')}` : '';
-    const res = await this.client.request(`GET /search/repositories`, {
+    const res = await this.client.request("GET /search/repositories", {
       q: `${
         params.search
       }${userParams}${organizationParams}${languageParams}${topicParams}${starParams}${sizeParams}${createdParams}+in:${params.in.join(

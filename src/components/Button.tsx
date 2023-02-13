@@ -16,7 +16,7 @@ type ExtraProps = {
 
 export type ButtonProps = MuiButtonProps & ExtraProps;
 
-const Button: ForwardRefRenderFunction<any, ButtonProps> = (
+const Button: ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
   {
     isLoading,
     children,

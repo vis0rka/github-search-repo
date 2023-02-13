@@ -75,7 +75,7 @@ export const SearchDatePicker: React.FC<SearchDatePickerProps> = ({
   };
 
   React.useEffect(() => {
-    if (!dates || !options) return;
+    if (!(dates && options)) return;
     if (Array.isArray(dates)) {
       if (dates[0] && dates[1]) {
         handleChange([
