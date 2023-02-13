@@ -4,6 +4,6 @@ import React from 'react'
 
 export interface GridProps extends MuiGridProps {}
 
-export const Grid: React.FC<GridProps> = props => {
-    return <MuiGrid {...props} />
+export const Grid: React.FC<GridProps> = (props) => {
+	return <MuiGrid {...props} />
 }

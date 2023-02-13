@@ -3,15 +3,11 @@ import { Box } from 'components/Box'
 import React from 'react'
 
 interface PageContentProps {
-    children?:React.ReactNode
+	children?: React.ReactNode
 }
 
-export const PageContent:React.FC<PageContentProps> = ({children}) => {
-  return (
-    <Root component='main'>
-        {children}
-    </Root>
-  )
+export const PageContent: React.FC<PageContentProps> = ({ children }) => {
+	return <Root component='main'>{children}</Root>
 }
 
 const Root = styled(Box)`

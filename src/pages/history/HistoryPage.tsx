@@ -1,25 +1,25 @@
-import styled from "@emotion/styled";
-import { Box } from "components/Box";
-import Button from "components/Button";
-import { ResizableDrawer } from "components/ResizableDrawer";
-import { Stack } from "components/Stack";
-import { Text } from "components/Text";
-import { SearchResultItem } from "features/github-search/card";
-import { cache, GetRepos } from "lib/api/GithubApi";
-import React from "react";
+import styled from '@emotion/styled'
+import { Box } from 'components/Box'
+import Button from 'components/Button'
+import { ResizableDrawer } from 'components/ResizableDrawer'
+import { Stack } from 'components/Stack'
+import { Text } from 'components/Text'
+import { SearchResultItem } from 'features/github-search/card'
+import { cache, GetRepos } from 'lib/api/GithubApi'
+import React from 'react'
 
 const HistoryPage = () => {
-	const [searchedData, setSearchedData] = React.useState<GetRepos | null>(null);
+	const [searchedData, setSearchedData] = React.useState<GetRepos | null>(null)
 
 	const cacheKeys = React.useMemo(() => {
-		let array: string[] = [];
+		let array: string[] = []
 
 		for (let key of cache.keys()) {
-			array.push(key);
+			array.push(key)
 		}
 
-		return array;
-	}, []);
+		return array
+	}, [])
 
 	const menu = React.useMemo(() => {
 		return (
@@ -37,12 +37,12 @@ const HistoryPage = () => {
 									{key}
 								</StyledText>
 							</Button>
-						);
+						)
 					})
 				)}
 			</Stack>
-		);
-	}, []);
+		)
+	}, [])
 
 	return (
 		<>
@@ -62,11 +62,11 @@ const HistoryPage = () => {
 				)}
 			</ResizableDrawer>
 		</>
-	);
-};
+	)
+}
 
 const StyledText = styled(Text)`
   overflow-wrap: anywhere;
-`;
+`
 
-export default HistoryPage;
+export default HistoryPage

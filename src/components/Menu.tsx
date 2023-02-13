@@ -3,6 +3,6 @@ import React from 'react'
 
 export interface MenuProps extends MuiMenuProps {}
 
-export const Menu: React.FC<MenuProps> = props => {
-    return <MuiMenu {...props} />
+export const Menu: React.FC<MenuProps> = (props) => {
+	return <MuiMenu {...props} />
 }
