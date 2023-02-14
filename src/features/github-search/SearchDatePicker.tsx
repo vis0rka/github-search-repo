@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Radio, RadioGroup } from 'components/form/Radio'
-import { TextField } from 'components/form/TextField'
-import { Slider } from 'components/Slider'
 import { Stack } from 'components/Stack'
-import { useDebounce } from 'hooks/useDebounce'
 import { RootDatepicker } from 'components/DatePicker'
 
 const dateOperators = [
@@ -64,7 +61,17 @@ export const SearchDatePicker: React.FC<SearchDatePickerProps> = ({
 
 	const [dates, setDates] = React.useState<
 		[Date | null, Date | null] | Date | null
-	>(null)
+	>(() => {
+    if(!initalValue) {
+      return null
+    }
+    if(initalValue?.[2]) {
+      return [new Date(initalValue[1]), new Date(initalValue[2])]
+    }
+
+    return new Date(initalValue[1])
+  })
+
 	const onChange = (dates: [Date | null, Date | null] | Date) => {
 		if (Array.isArray(dates)) {
 			const [start, end] = dates
@@ -73,6 +80,12 @@ export const SearchDatePicker: React.FC<SearchDatePickerProps> = ({
 			setDates(dates)
 		}
 	}
+  React.useEffect(() => {
+    if (initalValue === undefined) {
+      setOptions(undefined)
+      setDates(null)
+    }
+  }, [initalValue])
 
 	React.useEffect(() => {
 		if (!(dates && options)) return
@@ -89,6 +102,8 @@ export const SearchDatePicker: React.FC<SearchDatePickerProps> = ({
 
 		handleChange([options, dateFormatetter(dates!)])
 	}, [options, dates])
+
+
 	return (
 		<Root spacing={4}>
 			<Stack spacing={2} direction="row" display="flex" alignItems="center">

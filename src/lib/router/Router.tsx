@@ -15,7 +15,6 @@ export const AppRouter = () => {
 					<Routes>
 						<Route path="/" element={<MainLayout />}>
 							<Route index element={<Navigate to="/search" replace />} />
-
 							{mainRoutes.map((route) => (
 								<Route
 									path={route.path}
