@@ -1,6 +1,6 @@
 import {
 	StarsAndSizeOperators,
-	radiosNormalizer,
+	starsAndSizeNormalizer,
 } from 'features/github-search/SearchSizeAndSizeFilter'
 import { ApiBase } from './ApiBase'
 import { Endpoints } from '@octokit/types'
@@ -8,6 +8,7 @@ import {
 	DateOperators,
 	dateRadiosNormalizer,
 } from 'features/github-search/SearchDatePicker'
+import { queryParamsNormalizer } from './helpers'
 
 export interface GetRepoParams {
 	search: string
@@ -16,7 +17,6 @@ export interface GetRepoParams {
 	sort: 'stars' | 'forks' | 'default'
 
 	page: number
-	forks?: string
 	stars?: string[]
 	user?: string
 	org?: string
@@ -49,68 +49,13 @@ const getSerializedParams = (params: GetRepoParams) => {
 export class GithubApi extends ApiBase {
 	getRepo = async (params: GetRepoParams) => {
 		const cacheKey = getSerializedParams(params)
-
+    	const query = queryParamsNormalizer(params)
 		if (cache.has(cacheKey)) {
-			return cache.get(cacheKey)!
+			return cache.get(cacheKey)
 		}
 
-		const starParams = (() => {
-			if (!params?.stars) return ''
-
-			const operator = params?.stars[0] as StarsAndSizeOperators
-
-			if (operator === 'between') {
-				return radiosNormalizer[operator].query(
-					'stars',
-					params?.stars[1],
-					params?.stars[2],
-				)
-			}
-
-			return radiosNormalizer[operator].query('stars', params.stars[1])
-		})()
-		const createdParams = (() => {
-			if (!params?.created) return ''
-
-			const operator = params?.created[0] as DateOperators
-
-			if (operator === 'between') {
-				return dateRadiosNormalizer[operator].query(
-					'created',
-					params?.created[1],
-					params?.created[2],
-				)
-			}
-
-			return dateRadiosNormalizer[operator].query('created', params.created[1])
-		})()
-
-		const sizeParams = (() => {
-			if (!params?.size) return ''
-
-			const operator = params?.size[0] as StarsAndSizeOperators
-
-			if (operator === 'between') {
-				return radiosNormalizer[operator].query(
-					'size',
-					params?.size[1],
-					params?.size[2],
-				)
-			}
-
-			return radiosNormalizer[operator].query('size', params.size[1])
-		})()
-
-		const userParams = params?.user ? ` user:${params.user}` : ''
-		const organizationParams = params?.org ? ` org:${params.org}` : ''
-		const languageParams = params?.language
-			? ` language:${params.language.join(',')}`
-			: ''
-		const topicParams = params?.topic ? ` topic:${params.topic.join(',')}` : ''
 		const res = await this.client.request('GET /search/repositories', {
-			q: `${
-				params.search
-			}${userParams}${organizationParams}${languageParams}${topicParams}${starParams}${sizeParams}${createdParams}+in:${params.in.join(
+			q: `${query}+in:${params.in.join(
 				',',
 			)}&type=Repositories`,
 			per_page: PER_PAGE,

@@ -21,7 +21,7 @@ const startAndSizeOperators = [
 
 export type StarsAndSizeOperators = typeof startAndSizeOperators[number]
 
-export const radiosNormalizer = {
+export const starsAndSizeNormalizer = {
 	equal: {
 		label: 'equal',
 		query: (queryString: string, min: string) =>
@@ -95,7 +95,7 @@ export const SearchStarsAndSizeFilter: React.FC<SearchStarsAndSizeFilterProps> =
 						{startAndSizeOperators.map((operator) => (
 							<Radio
 								key={operator}
-								label={radiosNormalizer[operator].label}
+								label={starsAndSizeNormalizer[operator].label}
 								value={operator}
 							/>
 						))}

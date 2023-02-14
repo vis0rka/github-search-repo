@@ -19,8 +19,8 @@ export interface SearchFilterState {
 	order: GetRepoParams['order']
 	sort: GetRepoParams['sort']
 	page: number
-	forks: GetRepoParams['forks']
 	stars: GetRepoParams['stars']
+	size: GetRepoParams['size']
 	user: GetRepoParams['user']
 	org: GetRepoParams['org']
 	language: GetRepoParams['language']
@@ -47,7 +47,6 @@ export const initalFilters = {
 	order: withDefault<any, GetRepoParams['order']>(StringParam, 'desc'),
 	sort: withDefault<any, GetRepoParams['sort']>(StringParam, 'default'),
 	page: withDefault<any, number>(NumberParam, 1),
-	forks: withDefault<any, GetRepoParams['forks']>(StringParam, undefined),
 	user: withDefault<any, GetRepoParams['user']>(StringParam, undefined),
 	org: withDefault<any, GetRepoParams['org']>(StringParam, undefined),
 	stars: withDefault<any, GetRepoParams['stars']>(
