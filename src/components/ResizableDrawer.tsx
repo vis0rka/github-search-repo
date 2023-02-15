@@ -38,7 +38,7 @@ export const ResizableDrawer: React.FC<ResizableDrawerProps> = ({
 
 	return (
 		<Root>
-			<StyledLeftSide style={{ width: drawerWidth }}>
+			<StyledLeftSide style={{ width: drawerWidth }} data-testid="drawer">
 				<StyledDagger onMouseDown={(e) => handleMouseDown(e)} />
 				{menu}
 			</StyledLeftSide>

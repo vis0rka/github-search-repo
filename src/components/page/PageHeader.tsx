@@ -13,7 +13,7 @@ import { Navlink } from '../Navlink'
 
 export const PageHeader = () => {
 	return (
-		<Root display="flex" justifyContent="space-between" component='nav'>
+		<Root display="flex" justifyContent="space-between" component='header'>
 			<Stack direction="row" spacing={8}>
 				<Text variant="h1">Github Search App</Text>
 				<StyledNav>

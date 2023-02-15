@@ -26,7 +26,7 @@ const HistoryPage = () => {
     return (
       <Stack spacing={2} p={2} alignItems="center">
         {!cacheKeys.length ? (
-          <Text>Please search something</Text>
+          <Text>Please search something on search page!</Text>
         ) : (
           cacheKeys.map((key) => {
             return (

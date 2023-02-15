@@ -37,6 +37,7 @@ const SearchPage = () => {
         <SearchResults
           data={data}
           state={state}
+          data-testid='search-results'
           header={
             <SearchResultsHeader
               handleSearch={(filters) => getRepo(filters)}
