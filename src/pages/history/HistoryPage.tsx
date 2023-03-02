@@ -13,9 +13,9 @@ const HistoryPage = () => {
   const [searchedData, setSearchedData] = React.useState<GetRepos | null>(null);
 
   const cacheKeys = React.useMemo(() => {
-    let array: string[] = [];
+    const array: string[] = [];
 
-    for (let key of cache.keys()) {
+    for (const key of cache.keys()) {
       array.push(key);
     }
 

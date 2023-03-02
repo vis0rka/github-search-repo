@@ -8,11 +8,10 @@ import { GetRepos } from 'lib/api/GithubApi'
 import { SearchPageState } from 'pages/search/SearchPage'
 import React from 'react'
 import { SearchResultItem } from './card'
-import { SearchResultsPagination } from './SearchResultsPagination'
-import { SearchResultsHeader } from './SearchResultsHeader'
+
 
 interface SearchResultsProps {
-	data: GetRepos | null
+	data?: GetRepos
 	state: SearchPageState
 	pagination: React.ReactNode
 	header: React.ReactNode
